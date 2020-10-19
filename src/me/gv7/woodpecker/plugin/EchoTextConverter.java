@@ -6,19 +6,20 @@ import me.gv7.woodpecker.plugin.payload.WindowsEchoTextConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EchoTextConverter implements IPlugin {
-    public static IExtenderCallbacks callbacks;
+public class EchoTextConverter implements IHelperPlugin {
+    public static IHelperPluginCallbacks callbacks;
     public static IPluginHelper pluginHelper;
 
-    public void PluginMain(IExtenderCallbacks callbacks) {
-        this.callbacks = callbacks;
+    @Override
+    public void HelperPluginMain(IHelperPluginCallbacks iHelperPluginCallbacks) {
+        this.callbacks = iHelperPluginCallbacks;
         this.pluginHelper = callbacks.getPluginHelper();
-        callbacks.setPluginName("Echo Text Converter");
-        callbacks.setPluginVersion("0.1.0");
-        callbacks.setPluginAutor("c0ny1");
-        List<IPayloadGenerator> payloadGeneratorList = new ArrayList<IPayloadGenerator>();
-        payloadGeneratorList.add(new WindowsEchoTextConverter());
-        payloadGeneratorList.add(new LinuxEchoTextConverter());
-        callbacks.registerPayloadGenerator(payloadGeneratorList);
+        callbacks.setHelperPluginName("Echo Text Converter");
+        callbacks.setHelperPluginVersion("0.1.0");
+        callbacks.setHelperPluginVersion("c0ny1");
+        List<IHelper> helperPluginList = new ArrayList<IHelper>();
+        helperPluginList.add(new WindowsEchoTextConverter());
+        helperPluginList.add(new LinuxEchoTextConverter());
+        callbacks.registerHelper(helperPluginList);
     }
 }
