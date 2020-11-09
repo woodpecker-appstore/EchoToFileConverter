@@ -6,16 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class WindowsEchoTextConverter implements IHelper {
+public class LinuxEchoTextConverter implements IHelper {
     public static String strConverter(String text){
         String payload = text
                 .replace("\n","")
-                .replace("^","^^")
-                .replace("\"","^\"")
-                .replace("&","^&")
-                .replace("|","^|")
-                .replace("<","^<")
-                .replace(">","^>");
+                .replace("`","\\`")
+                .replace("'","\'")
+                .replace("\"","\\\"")
+                .replace("*","\\*")
+                .replace("&","\\&")
+                .replace("|","\\|")
+                .replace("<","\\<")
+                .replace(">","\\>")
+                .replace("{","\\{")
+                .replace("}","\\}")
+                .replace("(","\\(")
+                .replace(")","\\)")
+                .replace("!","\\!")
+                .replace("[","\\[")
+                .replace("]","\\]").replace(";","\\;");
         return payload;
     }
 
@@ -55,27 +64,26 @@ public class WindowsEchoTextConverter implements IHelper {
     @Override
     public IArgsUsageBinder getHelperCutomArgs() {
         IArgsUsageBinder argsUsageBinder = EchoTextConverter.pluginHelper.createArgsUsageBinder();
-        List<IArgs> args = new ArrayList<IArgs>();
-        IArgs args1 = EchoTextConverter.pluginHelper.createArgs();
+        List<IArg> arg = new ArrayList<IArg>();
+        IArg args1 = EchoTextConverter.pluginHelper.createArg();
         args1.setName("all");
         args1.setDefaultValue("<%out.write(\"1\");%>");
         args1.setDescription("write text");
         args1.setRequired(true);
-        args.add(args1);
-        argsUsageBinder.setArgsList(args);
+        arg.add(args1);
+        argsUsageBinder.setArgsList(arg);
         return argsUsageBinder;
     }
 
-    @Override
-    public void doHelp(Map<String, String> customArgs, IResultOutput iResultOutput) {
-        String text = customArgs.get("all");
+    public void doHelp(Map<String, Object> customArgs, IResultOutput resultOutput) {
+        String text = (String)customArgs.get("all");
         try {
             String payload = strConverter(text);
-            iResultOutput.successPrintln("Converter finish! command:");
-            iResultOutput.rawPrintln("\n");
+            resultOutput.successPrintln("Converter finish! command:");
+            resultOutput.rawPrintln("\n");
             String command = String.format("echo %s > c:/web/shell.jsp",payload);
-            iResultOutput.rawPrintln(command);
-            iResultOutput.rawPrintln("\n");
+            resultOutput.rawPrintln(command);
+            resultOutput.rawPrintln("\n");
 
         }catch (Exception e){}
     }
