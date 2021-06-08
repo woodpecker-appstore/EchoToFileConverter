@@ -58,7 +58,7 @@ public class LinuxEchoTextConverter implements IHelper {
 
     @Override
     public String getHelperTabCaption() {
-        return "Window Echo To File";
+        return "Linux Echo To File";
     }
 
     @Override
@@ -81,7 +81,7 @@ public class LinuxEchoTextConverter implements IHelper {
             String payload = strConverter(text);
             resultOutput.successPrintln("Converter finish! command:");
             resultOutput.rawPrintln("\n");
-            String command = String.format("echo %s > c:/web/shell.jsp",payload);
+            String command = String.format("echo %s > /tmp/webshell.jsp",payload);
             resultOutput.rawPrintln(command);
             resultOutput.rawPrintln("\n");
 

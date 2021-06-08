@@ -1,16 +1,13 @@
 package me.gv7.woodpecker.plugin.payload;
 
 import me.gv7.woodpecker.plugin.*;
-import sun.misc.BASE64Encoder;
+import me.gv7.woodpecker.tools.codec.BASE64Encoder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class LinuxBase64EchoTextConverter implements IHelper {
-
-    public String getPayloadTabCaption() {
-        return "Linux Echo To File";
-    }
 
     public static String strConverter(String text){
         String payload = text
@@ -26,7 +23,7 @@ public class LinuxBase64EchoTextConverter implements IHelper {
 
     @Override
     public String getHelperTabCaption() {
-        return "Linux Echo To File";
+        return "Linux Base64 Echo To File";
     }
 
     @Override

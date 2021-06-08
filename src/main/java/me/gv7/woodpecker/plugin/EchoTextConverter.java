@@ -16,8 +16,8 @@ public class EchoTextConverter implements IHelperPlugin {
         this.callbacks = iHelperPluginCallbacks;
         this.pluginHelper = callbacks.getPluginHelper();
         callbacks.setHelperPluginName("Echo Text Converter");
-        callbacks.setHelperPluginAutor("c0ny1");
-        callbacks.setHelperPluginVersion("0.1.0");
+        callbacks.setHelperPluginAutor("woodpecker-org");
+        callbacks.setHelperPluginVersion("0.2.0");
         List<IHelper> helperPluginList = new ArrayList<IHelper>();
         helperPluginList.add(new WindowsEchoTextConverter());
         helperPluginList.add(new LinuxEchoTextConverter());
